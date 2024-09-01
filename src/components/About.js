@@ -174,7 +174,7 @@ const Testimonial = ({ content, author, role }) => {
 // Testimonials Section
 const Testimonials = () => {
   const testimonials = [
-    { content: "VWatching Voaid come to life has been an epic adventure. It’s been a blast!", author: "Gaurish Mehra", role: "Co Founder" },
+    { content: "Watching Voaid come to life has been an epic adventure. It’s been a blast!", author: "Gaurish Mehra", role: "Co Founder" },
     { content: "We’ve put so much into Voaid, and hearing you guys dig it is just the best feeling!", author: "Gunit Kumar", role: "Co Founder" },
   ];
 
@@ -338,15 +338,33 @@ const NebulaBackground = () => {
 
 // Main Landing Page Component
 const LandingPage = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-white overflow-hidden">
-      <NebulaBackground /> 
+      <NebulaBackground />
 
       <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-gray-900 bg-opacity-50 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <GlowingText className="text-2xl font-bold" gradient="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-600">
             Voaid
           </GlowingText>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMobileMenu}
+            className="md:hidden text-pink-300 hover:text-purple-400 transition-colors duration-300 focus:outline-none"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+
+          {/* Navigation */}
           <nav className="hidden md:block">
             <ul className="flex space-x-6">
               {['About', 'Developers'].map((item) => (
@@ -358,14 +376,24 @@ const LandingPage = () => {
               ))}
             </ul>
           </nav>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="md:hidden text-pink-300"
-          >
-            Menu 
-          </motion.button>
         </div>
+
+        {/* Mobile Menu Drawer */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-16 left-0 w-full bg-gray-900 bg-opacity-90 py-4">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <ul className="flex flex-col space-y-4">
+                {['About', 'Developers'].map((item) => (
+                  <li key={item}>
+                    <a href={`/${item}`} className="text-pink-300 hover:text-purple-400 transition-colors duration-300">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
       </header>
 
       <main>

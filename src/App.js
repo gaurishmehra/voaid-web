@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import About from './components/About';
-import Contact from './components/Contact';
 import Developers from './components/Developers';
 
 
@@ -18,7 +17,6 @@ const App = () => {
         >
           <Routes>
             <Route path="/About" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/developers" element={<Developers />} />
             <Route path="/" element={<About />} />
           </Routes>
